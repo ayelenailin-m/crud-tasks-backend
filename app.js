@@ -1,16 +1,10 @@
 const express = require('express');
-
+const taskRoutes = require('./routes/taskRoutes');
 const app = express();
+const port = 3000;
+
 app.use(express.json());
-
-
-const { newconnection } = require("./config/bd")
-app.get("/", async (request, response) => {
-    const connection = await newconnection()
-    const results = await connection.query("SELECT * from tasks")
-    response.json(results[0])
-    connection.end()
-})
+app.use(taskRoutes);
 
 app.listen(3000, () => {
     console.log('Servidor corriendo en el puerto 3000');
