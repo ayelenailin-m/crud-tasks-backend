@@ -1,8 +1,8 @@
-import { create, getAll, getById, update, delete } from '../models/taskModel';
+import { createTasks, getAll, getById, updateTasks, deleteTasks } from '../models/taskModel.js';
 
 export function createTask(req, res) {
     const { title, description, isComplete } = req.body;
-    create(title, description, isComplete, (err, result) => {
+    createTasks(title, description, isComplete, (err, result) => {
         if (err) {
             return res.status(500).json({ error: 'Error al crear la tarea' });
         }
@@ -35,7 +35,7 @@ export function getTaskById(req, res) {
 export function updateTask(req, res) {
     const { id } = req.params;
     const { title, description, isComplete } = req.body;
-    update(id, title, description, isComplete, (err, result) => {
+    updateTasks(id, title, description, isComplete, (err, result) => {
         if (err) {
             return res.status(500).json({ error: 'Error al actualizar la tarea' });
         }
@@ -48,7 +48,7 @@ export function updateTask(req, res) {
 
 export function deleteTask(req, res) {
     const { id } = req.params;
-    delete(id, (err, result) => {
+    deleteTasks(id, (err, result) => {
         if (err) {
             return res.status(500).json({ error: 'Error al eliminar la tarea' });
         }
