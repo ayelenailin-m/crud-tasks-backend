@@ -1,27 +1,27 @@
-const Task = require('../models/taskModel');
+import { create, getAll, getById, update, delete } from '../models/taskModel';
 
-exports.createTask = (req, res) => {
+export function createTask(req, res) {
     const { title, description, isComplete } = req.body;
-    Task.create(title, description, isComplete, (err, result) => {
+    create(title, description, isComplete, (err, result) => {
         if (err) {
             return res.status(500).json({ error: 'Error al crear la tarea' });
         }
         res.status(201).json({ message: 'Tarea creada', id: result.insertId });
     });
-};
+}
 
-exports.getAllTasks = (req, res) => {
-    Task.getAll((err, results) => {
+export function getAllTasks(req, res) {
+    getAll((err, results) => {
         if (err) {
             return res.status(500).json({ error: 'Error al obtener las tareas' });
         }
         res.status(200).json(results);
     });
-};
+}
 
-exports.getTaskById = (req, res) => {
+export function getTaskById(req, res) {
     const { id } = req.params;
-    Task.getById(id, (err, results) => {
+    getById(id, (err, results) => {
         if (err) {
             return res.status(500).json({ error: 'Error al obtener la tarea' });
         }
@@ -30,12 +30,12 @@ exports.getTaskById = (req, res) => {
         }
         res.status(200).json(results[0]);
     });
-};
+}
 
-exports.updateTask = (req, res) => {
+export function updateTask(req, res) {
     const { id } = req.params;
     const { title, description, isComplete } = req.body;
-    Task.update(id, title, description, isComplete, (err, result) => {
+    update(id, title, description, isComplete, (err, result) => {
         if (err) {
             return res.status(500).json({ error: 'Error al actualizar la tarea' });
         }
@@ -44,11 +44,11 @@ exports.updateTask = (req, res) => {
         }
         res.status(200).json({ message: 'Tarea actualizada' });
     });
-};
+}
 
-exports.deleteTask = (req, res) => {
+export function deleteTask(req, res) {
     const { id } = req.params;
-    Task.delete(id, (err, result) => {
+    delete(id, (err, result) => {
         if (err) {
             return res.status(500).json({ error: 'Error al eliminar la tarea' });
         }
@@ -57,4 +57,4 @@ exports.deleteTask = (req, res) => {
         }
         res.status(200).json({ message: 'Tarea eliminada' });
     });
-};
+}

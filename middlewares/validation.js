@@ -1,4 +1,4 @@
-exports.validateTask = (req, res, next) => {
+export function validateTask(req, res, next) {
     const { title, description, isComplete } = req.body;
     if (!title || typeof title !== 'string' || title.length > 255) {
         return res.status(400).json({ error: 'Title es invalido' });
@@ -10,4 +10,4 @@ exports.validateTask = (req, res, next) => {
         return res.status(400).json({ error: 'isComplete es invalido' });
     }
     next();
-};
+}
