@@ -6,6 +6,5 @@ export function controladorErrores(req, res, next) {
     if (!errores.isEmpty()) {
         return res.status(400).json(errores);
     }
-    res.status(200).send('Tarea creada correctamente');
     next();
 };

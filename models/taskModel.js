@@ -2,8 +2,13 @@ import { db } from '../config/bd.js';
 
 
   const createTasks = (title, description, isComplete, callback) => {
-    const sql = 'INSERT INTO tasks (title, description, isComplete) VALUES (?, ?, ?)';
-    db.query(sql, [title, description, isComplete], callback);
+    try {
+      const sql = 'INSERT INTO tasks (title, description, isComplete) VALUES (?, ?, ?)';
+      db.query(sql, [title, description, isComplete], callback);
+    } catch (error) {
+      console.log("")
+    }
+    
   }
 
   const getAll = callback => {
